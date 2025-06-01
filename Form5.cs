@@ -119,12 +119,15 @@ namespace 購物達人 // 命名空間：購物達人
             pictureBox10.BringToFront();
 
 
-            pictureBox10.Left += 60; // 微調位置
+            pictureBox10.Left += 200; // 微調位置
+            pictureBox10.Top += 80; // 微調位置
+            label10.Left += 190; // 微調位置
+            label11.Left += 190; // 微調位置
             label12.Font = new Font(label12.Font.FontFamily, label12.Font.Size, FontStyle.Bold);// 加粗文字
             label12.Parent = pictureBox10;
             label12.BackColor = Color.Transparent;
             label12.ForeColor = Color.Black;
-            label12.Location = new Point(60, 50);
+            label12.Location = new Point(70, 20);
             label12.BringToFront();
 
             label10.ForeColor = Color.White;
