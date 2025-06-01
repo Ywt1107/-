@@ -1,0 +1,99 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35222.181
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "購物達人", "購物達人.csproj", "{D4CE0313-5EB7-4D34-9B26-D5A8430B5BFA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{43329DAE-1023-44D5-B8C0-5CA098EAD1D9}"
+	ProjectSection(SolutionItems) = preProject
+		bin\Debug\net8.0-windows\Images\11.png = bin\Debug\net8.0-windows\Images\11.png
+		bin\Debug\net8.0-windows\Images\12.png = bin\Debug\net8.0-windows\Images\12.png
+		bin\Debug\net8.0-windows\Images\33.png = bin\Debug\net8.0-windows\Images\33.png
+		bin\Debug\net8.0-windows\Images\bag.png = bin\Debug\net8.0-windows\Images\bag.png
+		bin\Debug\net8.0-windows\Images\cheap.png = bin\Debug\net8.0-windows\Images\cheap.png
+		bin\Debug\net8.0-windows\Images\e1.png = bin\Debug\net8.0-windows\Images\e1.png
+		bin\Debug\net8.0-windows\Images\e2.png = bin\Debug\net8.0-windows\Images\e2.png
+		bin\Debug\net8.0-windows\Images\e3.png = bin\Debug\net8.0-windows\Images\e3.png
+		bin\Debug\net8.0-windows\Images\e4.png = bin\Debug\net8.0-windows\Images\e4.png
+		bin\Debug\net8.0-windows\Images\LV.png = bin\Debug\net8.0-windows\Images\LV.png
+		bin\Debug\net8.0-windows\Images\m1.png = bin\Debug\net8.0-windows\Images\m1.png
+		bin\Debug\net8.0-windows\Images\m2.png = bin\Debug\net8.0-windows\Images\m2.png
+		bin\Debug\net8.0-windows\Images\m3.png = bin\Debug\net8.0-windows\Images\m3.png
+		bin\Debug\net8.0-windows\Images\m4.png = bin\Debug\net8.0-windows\Images\m4.png
+		bin\Debug\net8.0-windows\Images\m5.png = bin\Debug\net8.0-windows\Images\m5.png
+		bin\Debug\net8.0-windows\Images\m6.png = bin\Debug\net8.0-windows\Images\m6.png
+		bin\Debug\net8.0-windows\Images\m7.png = bin\Debug\net8.0-windows\Images\m7.png
+		bin\Debug\net8.0-windows\Images\m8.png = bin\Debug\net8.0-windows\Images\m8.png
+		bin\Debug\net8.0-windows\Images\n1.png = bin\Debug\net8.0-windows\Images\n1.png
+		bin\Debug\net8.0-windows\Images\n2.png = bin\Debug\net8.0-windows\Images\n2.png
+		bin\Debug\net8.0-windows\Images\n3.png = bin\Debug\net8.0-windows\Images\n3.png
+		bin\Debug\net8.0-windows\Images\OO.png = bin\Debug\net8.0-windows\Images\OO.png
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images2", "Images2", "{CD49CBCB-B9D8-41FC-8C6F-C2E36368EBA7}"
+	ProjectSection(SolutionItems) = preProject
+		bin\Debug\net8.0-windows\Images2\13.png = bin\Debug\net8.0-windows\Images2\13.png
+		bin\Debug\net8.0-windows\Images2\21.png = bin\Debug\net8.0-windows\Images2\21.png
+		bin\Debug\net8.0-windows\Images2\22.png = bin\Debug\net8.0-windows\Images2\22.png
+		bin\Debug\net8.0-windows\Images2\c1.png = bin\Debug\net8.0-windows\Images2\c1.png
+		bin\Debug\net8.0-windows\Images2\c2.png = bin\Debug\net8.0-windows\Images2\c2.png
+		bin\Debug\net8.0-windows\Images2\c3.png = bin\Debug\net8.0-windows\Images2\c3.png
+		bin\Debug\net8.0-windows\Images2\cola.png = bin\Debug\net8.0-windows\Images2\cola.png
+		bin\Debug\net8.0-windows\Images2\n1.png = bin\Debug\net8.0-windows\Images2\n1.png
+		bin\Debug\net8.0-windows\Images2\n2.png = bin\Debug\net8.0-windows\Images2\n2.png
+		bin\Debug\net8.0-windows\Images2\soda.png = bin\Debug\net8.0-windows\Images2\soda.png
+		bin\Debug\net8.0-windows\Images2\t1.png = bin\Debug\net8.0-windows\Images2\t1.png
+		bin\Debug\net8.0-windows\Images2\t2.png = bin\Debug\net8.0-windows\Images2\t2.png
+		bin\Debug\net8.0-windows\Images2\t3.png = bin\Debug\net8.0-windows\Images2\t3.png
+		bin\Debug\net8.0-windows\Images2\water.png = bin\Debug\net8.0-windows\Images2\water.png
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images3", "Images3", "{806F7256-8024-4302-A4DD-B3BF623F18AC}"
+	ProjectSection(SolutionItems) = preProject
+		bin\Debug\net8.0-windows\Images3\23.png = bin\Debug\net8.0-windows\Images3\23.png
+		bin\Debug\net8.0-windows\Images3\31.png = bin\Debug\net8.0-windows\Images3\31.png
+		bin\Debug\net8.0-windows\Images3\32.png = bin\Debug\net8.0-windows\Images3\32.png
+		bin\Debug\net8.0-windows\Images3\c1.png = bin\Debug\net8.0-windows\Images3\c1.png
+		bin\Debug\net8.0-windows\Images3\d1.png = bin\Debug\net8.0-windows\Images3\d1.png
+		bin\Debug\net8.0-windows\Images3\d2.png = bin\Debug\net8.0-windows\Images3\d2.png
+		bin\Debug\net8.0-windows\Images3\d3.png = bin\Debug\net8.0-windows\Images3\d3.png
+		bin\Debug\net8.0-windows\Images3\d4.png = bin\Debug\net8.0-windows\Images3\d4.png
+		bin\Debug\net8.0-windows\Images3\duck.png = bin\Debug\net8.0-windows\Images3\duck.png
+		bin\Debug\net8.0-windows\Images3\f1.png = bin\Debug\net8.0-windows\Images3\f1.png
+		bin\Debug\net8.0-windows\Images3\f2.png = bin\Debug\net8.0-windows\Images3\f2.png
+		bin\Debug\net8.0-windows\Images3\f3.png = bin\Debug\net8.0-windows\Images3\f3.png
+		bin\Debug\net8.0-windows\Images3\h1.png = bin\Debug\net8.0-windows\Images3\h1.png
+		bin\Debug\net8.0-windows\Images3\r1.png = bin\Debug\net8.0-windows\Images3\r1.png
+		bin\Debug\net8.0-windows\Images3\r2.png = bin\Debug\net8.0-windows\Images3\r2.png
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images4", "Images4", "{72103AA3-8545-4655-A555-F717C5AF19FD}"
+	ProjectSection(SolutionItems) = preProject
+		bin\Debug\net8.0-windows\Images4\主題難易.jpg = bin\Debug\net8.0-windows\Images4\主題難易.jpg
+		bin\Debug\net8.0-windows\Images4\失敗畫面.jpg = bin\Debug\net8.0-windows\Images4\失敗畫面.jpg
+		bin\Debug\net8.0-windows\Images4\專櫃遊戲畫面.jpg = bin\Debug\net8.0-windows\Images4\專櫃遊戲畫面.jpg
+		bin\Debug\net8.0-windows\Images4\成功畫面.jpg = bin\Debug\net8.0-windows\Images4\成功畫面.jpg
+		bin\Debug\net8.0-windows\Images4\玩具遊戲畫面.jpg = bin\Debug\net8.0-windows\Images4\玩具遊戲畫面.jpg
+		bin\Debug\net8.0-windows\Images4\超商遊戲畫面.png = bin\Debug\net8.0-windows\Images4\超商遊戲畫面.png
+		bin\Debug\net8.0-windows\Images4\開始畫面.jpg = bin\Debug\net8.0-windows\Images4\開始畫面.jpg
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D4CE0313-5EB7-4D34-9B26-D5A8430B5BFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4CE0313-5EB7-4D34-9B26-D5A8430B5BFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4CE0313-5EB7-4D34-9B26-D5A8430B5BFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4CE0313-5EB7-4D34-9B26-D5A8430B5BFA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {184D73C8-F682-4865-997B-93F9056381E1}
+	EndGlobalSection
+EndGlobal
