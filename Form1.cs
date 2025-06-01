@@ -1,4 +1,5 @@
 using System;                        // 提供基本的 .NET 功能（如數學運算、日期處理等）
+using System.Net;
 using System.Drawing;                // 提供圖形功能（如圖片、顏色等）
 using System.Linq;                   // 提供 LINQ 查詢語法支援
 using System.Reflection.Emit;        // 用於動態建立方法或型別（本程式未使用，可刪除）
@@ -40,45 +41,55 @@ namespace 購物達人 // 命名空間：購物達人
 
             try
             {
-                // 載入三張主要圖片
-                image1 = Image.FromFile("Images/33.png");
-                image2 = Image.FromFile("Images/11.png");
-                image3 = Image.FromFile("Images/12.png");
-                pictureBox10.SizeMode = PictureBoxSizeMode.StretchImage;// 圖片縮放填滿 PictureBox
+                // 載入三張主要圖片（透明 PNG）
+                image1 = LoadImageFromUrl("https://raw.githubusercontent.com/Ywt1107/-/master/Images/33.png");
+                image2 = LoadImageFromUrl("https://raw.githubusercontent.com/Ywt1107/-/master/Images/11.png");
+                image3 = LoadImageFromUrl("https://raw.githubusercontent.com/Ywt1107/-/master/Images/12.png");
+
+                // 設定圖片顯示方式與透明背景設定
+                pictureBox10.Parent = pictureBox11;             // 讓 pictureBox10 疊在 pictureBox11 上
+                pictureBox10.BackColor = Color.Transparent;     // 設定透明背景
+                pictureBox10.BringToFront();                    // 確保在最上層
+                pictureBox10.SizeMode = PictureBoxSizeMode.StretchImage;
+                pictureBox10.Image = image2;                    // 顯示透明圖片
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show("載入圖片失敗：" + ex.Message);
             }
 
-            UpdatePicture();         // 初始主圖片為 image2
+            UpdatePicture();         // 初始主圖片為 image2（可依邏輯調整）
             InitializeItemArrays();  // 初始化圖片與標籤陣列
             InitializeMoney();       // 隨機產生起始金額（400~900）
 
             // 初始化倒數計時器
             countdownTimer = new System.Windows.Forms.Timer();
-            countdownTimer.Interval = 1000;// 每秒觸發一次
+            countdownTimer.Interval = 1000;         // 每秒觸發一次
             countdownTimer.Tick += CountdownTimer_Tick;
-            Timer.Text = countdown.ToString(); // 顯示初始時間
-            countdownTimer.Start();            // 開始倒數
+            Timer.Text = countdown.ToString();      // 顯示初始時間
+            countdownTimer.Start();                 // 開始倒數
 
             LoadItemImages(); // 載入隨機商品與價格
         }
 
+        private Image LoadImageFromUrl(string url)
+        {
+            using (var wc = new WebClient())
+            {
+                byte[] data = wc.DownloadData(url);
+                using (var ms = new MemoryStream(data))
+                {
+                    return new Bitmap(ms); // Bitmap 支援透明度
+                }
+            }
+        }
+
+
+
         private void Form1_Load(object sender, EventArgs e)// 畫面載入事件
         {
-            // 設定背景圖
-            string imagePath = Path.Combine(Application.StartupPath, "Images4", "專櫃遊戲畫面.jpg");
-            if (File.Exists(imagePath))
-            {
-                pictureBox11.Image = Image.FromFile(imagePath);
-                pictureBox11.SizeMode = PictureBoxSizeMode.StretchImage;
-                pictureBox11.Dock = DockStyle.Fill; // 填滿整個畫面
-            }
-            else
-            {
-                MessageBox.Show("找不到圖片：" + imagePath);
-            }
+            LoadImageFromGitHub();
 
             // 將 Label 設為背景透明並指定為 pictureBox11 的子物件
             System.Windows.Forms.Label[] allLabels = new System.Windows.Forms.Label[] {
@@ -94,10 +105,19 @@ namespace 購物達人 // 命名空間：購物達人
             }
 
             // 設定主圖片與提示文字的層級與樣式
-            pictureBox10.Parent = pictureBox11;// 設定主圖屬性
+            // 將 pictureBox10 設定為 pictureBox11 的子元件
+            pictureBox10.Parent = pictureBox11;
+
+            // 設定透明背景
             pictureBox10.BackColor = Color.Transparent;
-            pictureBox10.BringToFront();// 讓主圖顯示在最上層
-            label12.BringToFront();// 讓提示文字也在最上層
+
+            // 顯示圖片，範例使用 image2
+            pictureBox10.Image = image2;
+            pictureBox10.SizeMode = PictureBoxSizeMode.StretchImage;
+
+            // 確保在最上層顯示
+            pictureBox10.BringToFront();
+
 
             pictureBox10.Left += 60; // 微調位置
             label12.Font = new Font(label12.Font.FontFamily, label12.Font.Size, FontStyle.Bold);// 加粗文字
@@ -116,7 +136,32 @@ namespace 購物達人 // 命名空間：購物達人
             isLabelActive = true;
             labelTimer.Start();// 啟動提示計時器
         }
+        private async void LoadImageFromGitHub()
+        {
+            string imageUrl = "https://raw.githubusercontent.com/Ywt1107/-/master/Images4/專櫃遊戲畫面.jpg";
 
+            try
+            {
+                using (WebClient client = new WebClient())
+                {
+                    // 從 GitHub 下載圖片成位元組資料
+                    byte[] imageBytes = await client.DownloadDataTaskAsync(imageUrl);
+
+                    // 將位元組轉為圖片
+                    using (MemoryStream ms = new MemoryStream(imageBytes))
+                    {
+                        pictureBox11.Image = Image.FromStream(ms);
+                        pictureBox11.SizeMode = PictureBoxSizeMode.StretchImage;
+                        pictureBox11.Dock = DockStyle.Fill;
+                        pictureBox11.SendToBack(); // 設為背景
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("圖片載入失敗：" + ex.Message);
+            }
+        }
         private void ArrangePictureBoxes()
         {
             // 商品圖片排列（3列3行）
@@ -259,17 +304,18 @@ namespace 購物達人 // 命名空間：購物達人
                 // 清空現有圖片與價格
                 foreach (var pb in itemPictureBoxes) pb.Image = null;
                 foreach (var lbl in itemLabels) lbl.Text = "";
+                string baseUrl = "https://raw.githubusercontent.com/Ywt1107/-/master/Images/";
 
                 // 商品清單（圖片與價格）
-                var items = new (string imagePath, int price)[]
+                var items = new (string fileName, int price)[]
                 {
-                    ("Images/LV.png", 50), ("Images/OO.png", 60), ("Images/cheap.png", 70),
-                    ("Images/n1.png", 80), ("Images/n2.png", 90), ("Images/n3.png", 100),
-                    ("Images/e1.png", 135), ("Images/e2.png", 165), ("Images/e3.png", 195),
-                    ("Images/e4.png", 200), ("Images/m1.png", 150), ("Images/m2.png", 120),
-                    ("Images/m3.png", 160), ("Images/m4.png", 180), ("Images/m5.png", 350),
-                    ("Images/m6.png", 500), ("Images/m7.png", 480), ("Images/m8.png", 270),
-                    ("Images/bag.png", 340)
+                    ("LV.png", 50), ("OO.png", 60), ("cheap.png", 70),
+                    ("n1.png", 80), ("n2.png", 90), ("n3.png", 100),
+                    ("e1.png", 135), ("e2.png", 165), ("e3.png", 195),  
+                    ("e4.png", 200), ("m1.png", 150), ("m2.png", 120),
+                    ("m3.png", 160), ("m4.png", 180), ("m5.png", 350),
+                    ("m6.png", 500), ("m7.png", 480), ("m8.png", 270),
+                    ("bag.png", 340)
                 };
 
                 // 隨機選 9 項商品並顯示
@@ -277,7 +323,8 @@ namespace 購物達人 // 命名空間：購物達人
                 for (int i = 0; i < itemPictureBoxes.Length; i++)// 將前 9 項商品依序顯示在畫面上
                 {
                     var item = shuffledItems[i];// 取得當前商品資訊（圖片路徑與價格）
-                    itemPictureBoxes[i].Image = Image.FromFile(item.imagePath);// 載入圖片並設定給對應的 PictureBox
+                    string imageUrl = baseUrl + item.fileName;
+                    itemPictureBoxes[i].Image = LoadImageFromUrl(imageUrl);// 載入圖片並設定給對應的 PictureBox
                     itemPictureBoxes[i].SizeMode = PictureBoxSizeMode.StretchImage;// 設定圖片顯示模式為填滿 PictureBox
                     itemPictureBoxes[i].BackColor = Color.Transparent;// 設定圖片的背景為透明
                     itemPictureBoxes[i].Parent = pictureBox11;// 設定圖片的容器為主背景圖片 PictureBox（可達成透明覆蓋）

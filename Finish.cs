@@ -1,4 +1,5 @@
 ﻿using System;                // 引用基本命名空間，提供常用功能（如事件、例外處理等）
+using System.Net;
 using System.Drawing;        // 提供繪圖功能，例如圖片、顏色、字型等
 using System.IO;             // 提供檔案與目錄的讀寫功能
 using System.Windows.Forms;  // 提供建立 Windows 表單應用程式的功能
@@ -16,26 +17,39 @@ namespace 購物達人  // 定義命名空間，用來組織類別，避免命�
 
         private void Finish_Load(object sender, EventArgs e)  // 表單載入事件處理方法
         {
-            // 建立圖片路徑：結合應用程式啟動路徑、資料夾名稱、圖片檔案名稱
-            string imagePath = Path.Combine(Application.StartupPath, "Images4", "成功畫面.jpg");
-
-            if (File.Exists(imagePath))  // 如果檔案存在
-            {
-                pictureBox1.Image = Image.FromFile(imagePath);              // 從檔案載入圖片至 pictureBox1
-                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;     // 設定圖片模式為拉伸填滿控制項
-                pictureBox1.Dock = DockStyle.Fill;                          // 將 pictureBox1 填滿整個表單
-            }
-            else  // 如果找不到圖片
-            {
-                MessageBox.Show("找不到圖片：" + imagePath);  // 顯示錯誤訊息
-            }
+            LoadImageFromGitHub();
 
             PositionButton();  // 呼叫自訂方法，設定按鈕位置
 
             button1.Text = "重新";  // 設定按鈕顯示文字為「重新」
             button1.Font = new Font(button1.Font.FontFamily, 10, FontStyle.Bold);  // 設定按鈕字型為原字型家族、大小 10、粗體
         }
+        private async void LoadImageFromGitHub()
+        {
+            string imageUrl = "https://raw.githubusercontent.com/Ywt1107/-/master/Images4/成功畫面.jpg";
 
+            try
+            {
+                using (WebClient client = new WebClient())
+                {
+                    // 從 GitHub 下載圖片成位元組資料
+                    byte[] imageBytes = await client.DownloadDataTaskAsync(imageUrl);
+
+                    // 將位元組轉為圖片
+                    using (MemoryStream ms = new MemoryStream(imageBytes))
+                    {
+                        pictureBox1.Image = Image.FromStream(ms);
+                        pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+                        pictureBox1.Dock = DockStyle.Fill;
+                        pictureBox1.SendToBack(); // 設為背景
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("圖片載入失敗：" + ex.Message);
+            }
+        }
         private void Finish_Resize(object sender, EventArgs e)  // 表單大小變動事件處理方法
         {
             PositionButton();  // 調整按鈕位置，確保仍在右下角

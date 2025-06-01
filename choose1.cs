@@ -1,4 +1,5 @@
 ﻿using System;                // 提供基本功能，例如事件、資料型別等
+using System.Net;
 using System.Drawing;        // 提供圖形繪製與處理功能（字型、顏色、圖片等）
 using System.IO;             // 提供檔案與目錄存取功能
 using System.Windows.Forms;  // 提供建立視窗應用程式的控制項和事件功能
@@ -16,19 +17,7 @@ namespace 購物達人  // 命名空間：用來組織程式碼，避免命名�
 
         private void choose1_Load(object sender, EventArgs e)  // 表單載入事件
         {
-            // 載入背景圖片
-            string imagePath = Path.Combine(Application.StartupPath, "Images4", "主題難易.jpg");
-            if (File.Exists(imagePath))  // 如果圖片存在
-            {
-                pictureBox1.Image = Image.FromFile(imagePath);          // 從檔案載入圖片
-                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage; // 圖片填滿 PictureBox
-                pictureBox1.Dock = DockStyle.Fill;                      // PictureBox 填滿整個表單
-                pictureBox1.SendToBack();                               // 讓圖片位於最底層
-            }
-            else
-            {
-                MessageBox.Show("找不到圖片：" + imagePath); // 若找不到圖片，顯示錯誤訊息
-            }
+            LoadImageFromGitHub();
 
             PositionButtons();  // 呼叫方法設定按鈕位置與尺寸
 
@@ -44,7 +33,32 @@ namespace 購物達人  // 命名空間：用來組織程式碼，避免命名�
             button3.Font = new Font(button3.Font.FontFamily, 15, FontStyle.Bold);
             button4.Font = new Font(button4.Font.FontFamily, 10, FontStyle.Bold);
         }
+        private async void LoadImageFromGitHub()
+        {
+            string imageUrl = "https://raw.githubusercontent.com/Ywt1107/-/master/Images4/主題難易.jpg";
 
+            try
+            {
+                using (WebClient client = new WebClient())
+                {
+                    // 從 GitHub 下載圖片成位元組資料
+                    byte[] imageBytes = await client.DownloadDataTaskAsync(imageUrl);
+
+                    // 將位元組轉為圖片
+                    using (MemoryStream ms = new MemoryStream(imageBytes))
+                    {
+                        pictureBox1.Image = Image.FromStream(ms);
+                        pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+                        pictureBox1.Dock = DockStyle.Fill;
+                        pictureBox1.SendToBack(); // 設為背景
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("圖片載入失敗：" + ex.Message);
+            }
+        }
         private void choose1_Resize(object sender, EventArgs e)  // 表單調整大小時執行
         {
             PositionButtons();  // 重新調整按鈕位置與大小

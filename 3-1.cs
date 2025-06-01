@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
@@ -16,19 +17,7 @@ namespace 購物達人
 
         private void _3_1_Load(object sender, EventArgs e)
         {
-            // 載入背景圖片
-            string imagePath = Path.Combine(Application.StartupPath, "Images4", "主題難易.jpg");
-            if (File.Exists(imagePath))
-            {
-                pictureBox1.Image = Image.FromFile(imagePath);
-                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-                pictureBox1.Dock = DockStyle.Fill;
-                pictureBox1.SendToBack(); // 背景圖片放最底層
-            }
-            else
-            {
-                MessageBox.Show("找不到圖片：" + imagePath);
-            }
+            LoadImageFromGitHub();
 
             PositionButtons();
 
@@ -44,7 +33,32 @@ namespace 購物達人
             button3.Font = new Font(button3.Font.FontFamily, 15, FontStyle.Bold); // 困難
             button4.Font = new Font(button4.Font.FontFamily, 10, FontStyle.Bold); // 返回
         }
+        private async void LoadImageFromGitHub()
+        {
+            string imageUrl = "https://raw.githubusercontent.com/Ywt1107/-/master/Images4/主題難易.jpg";
 
+            try
+            {
+                using (WebClient client = new WebClient())
+                {
+                    // 從 GitHub 下載圖片成位元組資料
+                    byte[] imageBytes = await client.DownloadDataTaskAsync(imageUrl);
+
+                    // 將位元組轉為圖片
+                    using (MemoryStream ms = new MemoryStream(imageBytes))
+                    {
+                        pictureBox1.Image = Image.FromStream(ms);
+                        pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+                        pictureBox1.Dock = DockStyle.Fill;
+                        pictureBox1.SendToBack(); // 設為背景
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("圖片載入失敗：" + ex.Message);
+            }
+        }
         private void _3_1_Resize(object sender, EventArgs e)
         {
             PositionButtons();
