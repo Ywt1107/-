@@ -138,6 +138,10 @@ namespace 購物達人 // 命名空間：購物達人
             pictureBox10.Image = image2;// 一般狀態圖片
             isLabelActive = true;
             labelTimer.Start();// 啟動提示計時器
+
+            this.Size = new Size(818, 497); // 設定表單大小
+            this.FormBorderStyle = FormBorderStyle.FixedSingle; // 固定邊框，不能拉動大小
+            this.MaximizeBox = false; // 禁用最大化按鈕
         }
         private async void LoadImageFromGitHub()
         {
